@@ -1,0 +1,90 @@
+---
+title: "Google Street View"
+author: "Prof. Steven Dutt Ross"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(googleVis)
+op <- options(gvis.plot.tag="chart")
+QUALIDADE <- read.table("QUALIDADEgooglev2.csv", header=TRUE, sep=";", 
+                        na.strings="NA", dec=".", strip.white=TRUE)
+QUALIDADE$LatLong <- as.character(QUALIDADE$LatLong)
+QUALIDADE$gestao <- as.character(QUALIDADE$gestao)
+QUALIDADE$info <- as.character(QUALIDADE$info)
+
+```
+
+## Você sabia que o R tem uma interface com o Google Maps?
+
+O R é cada vez mais integrado com os sistemas da *web*. Nesse caso, foi desenvolvida uma API para integrar as **ferramentas de Visualização do Google no R**. Com isso, é possível fazer diversos gráficos modernos e interativos. No gráfico abaixo, por exemplo, podemos ver as Unidades de Pronto Atendimento - UPAS da cidade do Rio de Janeiro. Nesse tipo de visualização, também é possível ver a foto da frente/fachada de cada UPA.
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Mapa <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                           options=list(showTip=TRUE, 
+                                        showLine=TRUE, 
+                                        width=800, height=700,
+                                        enableScrollWheel=TRUE,
+                                        useMapTypeControl=TRUE))
+plot(Mapa)
+
+```
+<br>
+<br>
+<br>
+
+
+## Cristo Redentor
+
+Podemos também fazer diversas modificações. Por exemplo, podemos mudar o formato do ícone para o Cristo Redentor....
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Mapadaqualidade2 <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                            options=list(showTip=TRUE, 
+                                         showLine=TRUE, 
+                                         enableScrollWheel=TRUE,
+                                         useMapTypeControl=TRUE,
+                                         icons=paste0("{",
+                                                      "'default': {'normal':                                                                           'http://icons.iconarchive.com/",
+                                                      "icons/iconshock/world-places/48/",
+                                                      "christ-the-redeemer-icon.png',\n",
+                                                      "'selected':                                                                                     'http://icons.iconarchive.com/",
+                                                      "icons/iconshock/world-places/48/",
+                                                      "christ-the-redeemer-icon.png'",
+                                                      "}}")))
+
+plot(Mapadaqualidade2)
+
+```
+<br>
+<br>
+<br>
+
+
+## Ficou exagerado? Também achei.... que tal um pin azul? Um pouco mais profissional?
+
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+#http://icons.iconarchive.com/icons/icons-land/vista-map-markers/48/Map-Marker-Ball-Right-Azure-icon.png
+
+Mapadaqualidade3 <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                            options=list(showTip=TRUE, 
+                                         showLine=TRUE, 
+                                         enableScrollWheel=TRUE,
+                                         useMapTypeControl=TRUE,
+                                         icons=paste0("{",
+                                                      "'default': {'normal':                                                                           'http://icons.iconarchive.com/",
+                                                      "icons/icons-land/vista-map-markers/48/",
+                                                      "Map-Marker-Ball-Right-Azure-icon.png',\n",
+                                                      "'selected':                                                                                     'http://icons.iconarchive.com/",
+                                                      "icons/icons-land/vista-map-markers/48/",
+                                                      "Map-Marker-Ball-Right-Azure-icon.png'",
+                                                      "}}")))
+
+plot(Mapadaqualidade3)
+
+```
+<br>
