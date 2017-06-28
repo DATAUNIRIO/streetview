@@ -20,9 +20,9 @@ UF <- read.table("UF.csv", header=TRUE, sep=";",
 
 ```
 
-## VocÍ sabia que o R tem uma interface com o Google Maps?
+## Voc√™ sabia que o R tem uma interface com o Google Maps?
 
-O R È cada vez mais integrado com os sistemas da *web*. Nesse caso, foi desenvolvida uma API para integrar as **ferramentas de VisualizaÁ„o do Google no R**. Com isso, È possÌvel fazer diversos gr·ficos modernos e interativos. No gr·fico abaixo, por exemplo, podemos ver as Unidades de Pronto Atendimento - UPAS da cidade do Rio de Janeiro. Nesse tipo de visualizaÁ„o, tambÈm È possÌvel ver a foto da frente/fachada de cada UPA.
+O R √© cada vez mais integrado com os sistemas da *web*. Nesse caso, foi desenvolvida uma API para integrar as **ferramentas de Visualiza??o do Google no R**. Com isso, √© poss√≠vel fazer diversos gr√°ficos modernos e interativos. No gr√°fico abaixo, por exemplo, podemos ver as Unidades de Pronto Atendimento - UPAS da cidade do Rio de Janeiro. Nesse tipo de visualiza√ß√£o, tamb√©m √© poss√≠vel ver a foto da frente/fachada de cada UPA.
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
@@ -42,7 +42,7 @@ plot(Mapa)
 
 ## Cristo Redentor
 
-Podemos tambÈm fazer diversas modificaÁıes. Por exemplo, podemos mudar o formato do Ìcone para o Cristo Redentor....
+Podemos tamb√©m fazer diversas modifica√ß√µes. Por exemplo, podemos mudar o formato do √≠cone para o Cristo Redentor....
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
@@ -68,7 +68,7 @@ plot(Mapadaqualidade2)
 <br>
 
 
-## Ficou exagerado? TambÈm achei.... que tal um pin azul? Um pouco mais profissional?
+## Ficou exagerado? Tamb√©m achei.... que tal um pin azul? Um pouco mais profissional?
 
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
@@ -94,11 +94,11 @@ plot(Mapadaqualidade3)
 <br>
 
 
-## Mapas para dados de ·rea 
+## Mapas para dados de √°rea 
 <br>
 
 
-## Õndice de desenvolvimento Humano por Unidades da FederaÁ„o - UF
+## √≠ndice de desenvolvimento Humano por Unidades da Federa√ß√£o - UF
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
@@ -113,7 +113,7 @@ plot(IDH)
 
 ```
 
-## Õndice de Gini por Unidades da FederaÁ„o - UF
+## √≠ndice de Gini por Unidades da Federa√ß√£o - UF
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
@@ -131,7 +131,7 @@ plot(GINI)
 <br>
 
 
-## Gr·fico de Barras
+## Gr√°fico de Barras
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 df=data.frame(country=c("US", "GB", "BR", "FR", "AU"), 
@@ -144,7 +144,7 @@ plot(Bar)
 ```
 
 
-## Gr·fico de Bolhas
+## Gr√°fico de Bolhas
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
@@ -170,7 +170,7 @@ plot(Org)
 ```
 
 ## Tabela
-AtÈ mesmo uma tabela pode ficar mais interessante...
+At? mesmo uma tabela pode ficar mais interessante...
 
 ```{r echo=FALSE, results='asis', tidy=TRUE}
 
