@@ -1,0 +1,185 @@
+---
+title: "Google Street View"
+author: "Prof. Steven Dutt Ross"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+require(googleVis)
+op <- options(gvis.plot.tag="chart")
+QUALIDADE <- read.table("QUALIDADEgooglev2.csv", header=TRUE, sep=";", 
+                        na.strings="NA", dec=".", strip.white=TRUE)
+QUALIDADE$LatLong <- as.character(QUALIDADE$LatLong)
+QUALIDADE$gestao <- as.character(QUALIDADE$gestao)
+QUALIDADE$info <- as.character(QUALIDADE$info)
+
+UF <- read.table("UF.csv", header=TRUE, sep=";", 
+                        na.strings="NA", dec=",", strip.white=TRUE)
+
+```
+
+## Você sabia que o R tem uma interface com o Google Maps?
+
+O R é cada vez mais integrado com os sistemas da *web*. Nesse caso, foi desenvolvida uma API para integrar as **ferramentas de Visualização do Google no R**. Com isso, é possível fazer diversos gráficos modernos e interativos. No gráfico abaixo, por exemplo, podemos ver as Unidades de Pronto Atendimento - UPAS da cidade do Rio de Janeiro. Nesse tipo de visualização, também é possível ver a foto da frente/fachada de cada UPA.
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Mapa <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                           options=list(showTip=TRUE, 
+                                        showLine=TRUE, 
+                                        width=800, height=700,
+                                        enableScrollWheel=TRUE,
+                                        useMapTypeControl=TRUE))
+plot(Mapa)
+
+```
+<br>
+<br>
+<br>
+
+
+## Cristo Redentor
+
+Podemos também fazer diversas modificações. Por exemplo, podemos mudar o formato do ícone para o Cristo Redentor....
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Mapadaqualidade2 <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                            options=list(showTip=TRUE, 
+                                         showLine=TRUE, 
+                                         enableScrollWheel=TRUE,
+                                         useMapTypeControl=TRUE,
+                                         icons=paste0("{",
+                                                      "'default': {'normal':                                                                           'http://icons.iconarchive.com/",
+                                                      "icons/iconshock/world-places/48/",
+                                                      "christ-the-redeemer-icon.png',\n",
+                                                      "'selected':                                                                                     'http://icons.iconarchive.com/",
+                                                      "icons/iconshock/world-places/48/",
+                                                      "christ-the-redeemer-icon.png'",
+                                                      "}}")))
+
+plot(Mapadaqualidade2)
+
+```
+<br>
+<br>
+<br>
+
+
+## Ficou exagerado? Também achei.... que tal um pin azul? Um pouco mais profissional?
+
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+#http://icons.iconarchive.com/icons/icons-land/vista-map-markers/48/Map-Marker-Ball-Right-Azure-icon.png
+
+Mapadaqualidade3 <- gvisMap(QUALIDADE,locationvar ="LatLong" ,  tipvar = "info",
+                            options=list(showTip=TRUE, 
+                                         showLine=TRUE, 
+                                         enableScrollWheel=TRUE,
+                                         useMapTypeControl=TRUE,
+                                         icons=paste0("{",
+                                                      "'default': {'normal':                                                                           'http://icons.iconarchive.com/",
+                                                      "icons/icons-land/vista-map-markers/48/",
+                                                      "Map-Marker-Ball-Right-Azure-icon.png',\n",
+                                                      "'selected':                                                                                     'http://icons.iconarchive.com/",
+                                                      "icons/icons-land/vista-map-markers/48/",
+                                                      "Map-Marker-Ball-Right-Azure-icon.png'",
+                                                      "}}")))
+
+plot(Mapadaqualidade3)
+
+```
+<br>
+
+
+## Mapas para dados de área 
+<br>
+
+
+## Índice de desenvolvimento Humano por Unidades da Federação - UF
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+IDH<- gvisGeoChart(UF, "Estado", "IDH",
+                      options=list(region="BR", 
+                                   displayMode="regions", 
+                                   resolution="provinces",
+                                   width=800, height=600,
+colorAxis="{values:[0.65,0.75,0.85],
+colors:[\'white', \'royalblue',\'navy']}"))
+plot(IDH)
+
+```
+
+## Índice de Gini por Unidades da Federação - UF
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+GINI<- gvisGeoChart(UF, "Estado", "Gini",
+                      options=list(region="BR", 
+                                   displayMode="regions", 
+                                   resolution="provinces",
+                                   width=800, height=600))
+plot(GINI)
+
+```
+
+# Outros exemplos
+<br>
+<br>
+
+
+## Gráfico de Barras
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+df=data.frame(country=c("US", "GB", "BR", "FR", "AU"), 
+              var1=c(10,13,14,13,12), 
+              var2=c(23,12,32,20,30))
+
+Bar <- gvisBarChart(df)
+plot(Bar)
+
+```
+
+
+## Gráfico de Bolhas
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Bubble <- gvisBubbleChart(Fruits, idvar="Fruit", 
+                          xvar="Sales", yvar="Expenses",
+                          colorvar="Year", sizevar="Profit",
+                          options=list(width=800, height=600,
+                            hAxis='{minValue:75, maxValue:125}'))
+plot(Bubble)
+
+```
+
+
+## Organograma
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+Org <- gvisOrgChart(Regions, 
+                    options=list(width=8000, height=600,
+                                 size='large', allowCollapse=TRUE))
+plot(Org)
+
+```
+
+## Tabela
+Até mesmo uma tabela pode ficar mais interessante...
+
+```{r echo=FALSE, results='asis', tidy=TRUE}
+
+PopTable <- gvisTable(Population, 
+                      formats=list(Population="#,###",
+                                   '% of World Population'='#.#%'),
+                      options=list(width=800, height=600,page='enable'))
+plot(PopTable)
+
+
+```
+
