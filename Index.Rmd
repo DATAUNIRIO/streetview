@@ -6,7 +6,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
+#https://kuanhoong.wordpress.com/2016/01/19/googlevis-with-r-markdown/
 require(googleVis)
 op <- options(gvis.plot.tag="chart")
 
